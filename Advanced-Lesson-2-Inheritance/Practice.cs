@@ -33,7 +33,8 @@ namespace Advanced_Lesson_2_Inheritance
                     }
                 case "2":
                     {
-                        Console.WriteLine("You have chosen  printing into file");
+                        var printer2 = new FilePrinter(text,"test");
+                        printer2.Print();
                         break;
                     }
                 case "3":
@@ -75,6 +76,21 @@ namespace Advanced_Lesson_2_Inheritance
 
         }
 
+        public class FilePrinter : Printer
+        {
+            public override void Print()
+            {
+                System.IO.File.AppendAllText($@"D:\{_filename}.txt", printingText);
+            }
+
+            public FilePrinter(string str, string filename) : base(str)
+            {
+                _filename = filename;
+            }
+            private string _filename;
+
+
+        }
 
 
 
