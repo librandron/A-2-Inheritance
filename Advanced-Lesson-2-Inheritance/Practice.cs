@@ -16,7 +16,8 @@ namespace Advanced_Lesson_2_Inheritance
         /// </summary>
         public static void A_L2_P1_1()
         {
-            Console.WriteLine("Enter your chose:");
+            Console.WriteLine("Enter your text:");
+            var text = Console.ReadLine();
             Console.WriteLine("Choose print type:");
             Console.WriteLine("1- toconsole");
             Console.WriteLine("2- in file");
@@ -26,7 +27,8 @@ namespace Advanced_Lesson_2_Inheritance
             {
                 case "1":
                     {
-                        Console.WriteLine("You have chosen  printing into console");
+                        var printer = new ConsolePrinter(text, ConsoleColor.Blue);
+                        printer.Print();
                         break;
                     }
                 case "2":
@@ -42,6 +44,45 @@ namespace Advanced_Lesson_2_Inheritance
             }
 
 
-        }       
+        }
+        
+        public abstract class Printer
+        {
+            public string printingText { get; set; }
+            public abstract void Print(); 
+
+            public Printer(string str)
+            {
+                printingText = str;
+            }
+        }
+
+        public class ConsolePrinter : Printer
+        {
+            public override void Print()
+            {
+                Console.ForegroundColor = _color;
+                Console.WriteLine(printingText);
+                Console.ResetColor();
+            }
+
+            public ConsolePrinter(string str, ConsoleColor color): base(str)
+            {
+                 _color = color;
+            }
+            private ConsoleColor _color;
+
+
+        }
+
+
+
+
+
+
+
+
+
+
     }
 }
